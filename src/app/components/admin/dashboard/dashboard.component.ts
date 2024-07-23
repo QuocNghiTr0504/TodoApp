@@ -18,7 +18,8 @@ export class DashboardComponent {
   showUserModal: boolean = false;
   isUpdateMode: boolean = false;
   currentUser: User = { id: 0, username: '', email: '', role: '' };
-
+  count:number = 0;
+  
   constructor(private userService: UserService) {}
 
   ngOnInit(): void {
@@ -27,6 +28,7 @@ export class DashboardComponent {
 
   loadUsers(): void {
     this.userService.getUsers().subscribe(users => {
+      this.count = users.length;
       this.users = users;
       this.filteredUsers = users;
     });

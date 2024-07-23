@@ -6,13 +6,14 @@ import { AuthService } from './service/auth.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [ CommonModule,RouterOutlet,RouterLinkActive, RouterLink],
+  imports: [ CommonModule, RouterOutlet, RouterLinkActive, RouterLink ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrls: ['./app.component.scss']
 })
 export class AppComponent implements OnInit {
-  title = 'todoList';
+  title = 'todoList'; 
   isLoggedIn = false;
+  userRole: string | null = null;
 
   constructor(private authService: AuthService, private router: Router) {}
 
@@ -20,11 +21,11 @@ export class AppComponent implements OnInit {
     this.authService.checkLoginStatus().subscribe(status => {
       this.isLoggedIn = status;
       if (status) {
-        const role = this.authService.getRole();
-        if (role === 'admin') {
+        this.userRole = this.authService.getRole();
+        if (this.userRole === 'admin') {
           this.router.navigate(['/dashboard']);
         } 
-        if(role === 'user') {
+        if (this.userRole === 'user') {
           this.router.navigate(['/todo']);
         }
       }

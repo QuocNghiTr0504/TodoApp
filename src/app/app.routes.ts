@@ -9,10 +9,7 @@ import { DashboardComponent } from './components/admin/dashboard/dashboard.compo
 
 export const routes: Routes = [
     
-  {
-      path: '',
-      component: TodolistComponent
-  },
+
   {
     path: 'register',
     component: RegisterComponent
